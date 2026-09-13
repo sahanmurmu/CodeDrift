@@ -1,9 +1,10 @@
 # CodeDrift
 
-**CodeDrift** is a CLI tool that scans a project for outdated or overly
-complex code patterns — and then uses AI to *contextually* judge whether
+**CodeDrift** is a CLI tool that scans a project for outdated
+code patterns — and then uses AI to *contextually* judge whether
 each finding is actually worth fixing, instead of blindly flagging
 everything a rule matches.
+Planned: Detection of overly complex code patterns.
 
 ## Why this exists
 
