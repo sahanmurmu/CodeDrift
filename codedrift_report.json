@@ -1,0 +1,116 @@
+{
+  "scanned_directory": ".",
+  "total_flagged_files": 4,
+  "total_affected_lines": 5,
+  "results": [
+    {
+      "file": "sample\\lagacy.js",
+      "extension": ".js",
+      "findings_count": 5,
+      "findings": [
+        {
+          "line": 5,
+          "original_code": "setTimeout(function() {",
+          "detected_issues": [
+            "[JS003] Anonymous function expression used (prefer modern arrow functions)"
+          ],
+          "severity": "low",
+          "suggested_fix": "    setTimeout(() => {",
+          "changes_made": [
+            "Replaced function expression with arrow function syntax"
+          ],
+          "why_should_i_care": "Arrow functions are more concise and automatically preserve lexical 'this' binding, making callback functions cleaner and less error-prone.",
+          "priority": "optional",
+          "risk": "low",
+          "confidence": 0.95
+        },
+        {
+          "line": 11,
+          "original_code": "var firstName = \"Sahan\";",
+          "detected_issues": [
+            "[JS001] Outdated 'var' keyword used (function-scoped, prone to hoisting)"
+          ],
+          "severity": "medium",
+          "suggested_fix": "const firstName = \"Sahan\";",
+          "changes_made": [
+            "Replaced 'var' declaration with 'const'"
+          ],
+          "why_should_i_care": "'var' is function-scoped and prone to hoisting bugs. Using 'const' enforces block scoping and guarantees the variable reference won't be reassigned.",
+          "priority": "recommended",
+          "risk": "low",
+          "confidence": 0.98
+        },
+        {
+          "line": 12,
+          "original_code": "var greeting = \"Welcome back, \" + firstName + \"!\";",
+          "detected_issues": [
+            "[JS001] Outdated 'var' keyword used (function-scoped, prone to hoisting)",
+            "[JS002] String concatenation using + operator (prefer template literals)"
+          ],
+          "severity": "medium",
+          "suggested_fix": "const greeting = `Welcome back, ${firstName}!`;",
+          "changes_made": [
+            "Replaced 'var' declaration with 'const'",
+            "Replaced string concatenation (+) with ES6 template literal"
+          ],
+          "why_should_i_care": "Template literals improve readability and eliminate errors from tedious string operator concatenation, while 'const' prevents scope leakage.",
+          "priority": "recommended",
+          "risk": "low",
+          "confidence": 0.98
+        },
+        {
+          "line": 15,
+          "original_code": "var numbers = [1, 2, 3];",
+          "detected_issues": [
+            "[JS001] Outdated 'var' keyword used (function-scoped, prone to hoisting)"
+          ],
+          "severity": "medium",
+          "suggested_fix": "const numbers = [1, 2, 3];",
+          "changes_made": [
+            "Replaced 'var' declaration with 'const'"
+          ],
+          "why_should_i_care": "Using 'const' prevents variable re-declaration or global scope pollution caused by standard 'var' hoisting.",
+          "priority": "recommended",
+          "risk": "low",
+          "confidence": 0.98
+        },
+        {
+          "line": 16,
+          "original_code": "var doubled = numbers.map(function(n) {",
+          "detected_issues": [
+            "[JS001] Outdated 'var' keyword used (function-scoped, prone to hoisting)",
+            "[JS003] Anonymous function expression used (prefer modern arrow functions)"
+          ],
+          "severity": "medium",
+          "suggested_fix": "const doubled = numbers.map(n => n * 2);",
+          "changes_made": [
+            "Replaced 'var' declaration with 'const'",
+            "Replaced anonymous function expression with concise arrow function"
+          ],
+          "why_should_i_care": "Modern array operations prefer arrow function shorthand, which significantly reduces boilerplate code and improves readability.",
+          "priority": "recommended",
+          "risk": "low",
+          "confidence": 0.98
+        }
+      ]
+    },
+    {
+      "file": "sample\\sample.py",
+      "extension": ".py",
+      "findings_count": 0,
+      "findings": []
+    },
+    {
+      "file": "tests\\valid.js",
+      "extension": ".js",
+      "findings_count": 0,
+      "findings": []
+    },
+    {
+      "file": "tests\\valid.py",
+      "extension": ".py",
+      "findings_count": 0,
+      "findings": []
+    }
+  ]
+}
