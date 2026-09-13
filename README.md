@@ -82,30 +82,59 @@ python scanner.py
 
 ### Sample output
 
+Running `python scanner.py examples/`:
+
 ```
 ============================================================
 CODEDRIFT CLI REPORT
 ============================================================
 
-📂 File: sample/legacy.js
+📂 File: examples/legacy.js
 ------------------------------------------------------------
 
-  [MEDIUM priority / LOW risk] Line 11 (1 related issues) | Confidence: 98%
-     - var firstName = "Sahan";
-     + const firstName = "Sahan";
+  [MEDIUM priority / LOW risk] Line 9 (1 related issues) | Confidence: 98%
+     - var isLoggedIn = false;
+     + let isLoggedIn = false;
      Changes:
-       ✓ Replaced 'var' keyword with 'const'
-     💡 Why should I care: Using 'var' can lead to scope hoisting bugs.
+       ✓ Replaced 'var' keyword with 'let'
+     💡 Why should I care: 'var' is function-scoped and can lead to accidental
+        bugs from variable hoisting.
      📌 Priority: MEDIUM | Risk: Low
+
+  [LOW priority / LOW risk] Line 13 (1 related issues) | Confidence: 95%
+     - return "Hello, " + name + "! Welcome back.";
+     + return `Hello, ${name}! Welcome back.`;
+     Changes:
+       ✓ Replaced string concatenation with a template literal
+     💡 Why should I care: Template literals are easier to read and avoid
+        concatenation mistakes.
+     📌 Priority: LOW | Risk: Low
 ```
 
-When AI decides a flagged pattern is intentional, it says so instead of
+When AI decides a flagged pattern is intentional, it explains why instead of
 forcing a change:
 
 ```
-   ✨ AI Skipped Line 4: The comment explicitly states that strict type
-      matching via type() == int is required to reject subclasses like bool.
+📂 File: examples/legacy.py
+------------------------------------------------------------
+
+  [MEDIUM priority / LOW risk] Line 22 (1 related issues) | Confidence: 96%
+     - if type(value) == int:
+     + if isinstance(value, int):
+     Changes:
+       ✓ Replaced type() equality check with isinstance()
+     💡 Why should I care: isinstance() is the idiomatic way to check types
+        in Python and also supports subclasses.
+     📌 Priority: MEDIUM | Risk: Low
+
+   ✨ AI Skipped Line 31: The comment explains that bool is a subclass of
+      int in Python, so isinstance() would incorrectly accept True/False
+      here — the strict type() check is intentional.
 ```
+
+> Exact wording and confidence scores will vary slightly between runs since
+> they come from a live AI call — the pattern (flag vs. skip, with reasoning)
+> stays consistent.
 
 ## Rate limits
 
